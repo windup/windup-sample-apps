@@ -8,23 +8,18 @@
         <version>14</version>  
     </parent>
 
-    <groupId>org.jboss.windup</groupId>
-    <artifactId>windup-parent</artifactId>
+    <groupId>org.jboss.windup.sample.apps</groupId>
+    <artifactId>windup-sample-apps-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <name>Windup Parent</name>
-    <description>Migration Tools</description>
+    <name>Windup Sample Apps parent</name>
+    <description>Sample applications for Windup testsuite and manual testing.</description>
 
     <properties>
-        <version.furnace>2.5.0.Final</version.furnace>
-        <version.titangraph>0.4.4</version.titangraph>
-        <version.tinkerpop.blueprints>2.5.0</version.tinkerpop.blueprints>
-        <version.freemarker>2.3.19</version.freemarker>
-
-        <windup.scm.connection>scm:git:https://github.com/jsight/windup.git</windup.scm.connection>
-        <windup.developer.connection>scm:git:git@github.com:jsight/windup.git</windup.developer.connection>
-        <windup.scm.url>http://github.com/windup/windup</windup.scm.url>
+        <windup.scm.connection>scm:git:https://github.com/windup/windup-sample-apps.git</windup.scm.connection>
+        <windup.developer.connection>scm:git:git@github.com:windup/windup-sample-apps.git</windup.developer.connection>
+        <windup.scm.url>https://github.com/windup/windup-sample-apps</windup.scm.url>
         
         <!-- This keeps javadoc from failing on projects with no actual .java source files -->
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
@@ -40,18 +35,8 @@
     </scm>
 
     <modules>
-        <module>graph</module>
-        <module>decompiler</module> <!-- Needed by one the JavaAST... rule in config/api. -->
-        <module>config</module>     <!-- TODO: Break parts of this into rules/app/... -->
-        <module>tests/core</module>
         <module>utils</module>
-        <module>exec</module>       <!-- TODO: Break this into ext/config-xml and rules/app/... -->
-        <module>reporting</module>
-        <module>ui</module>
-        <module>logging</module>
-        
-        <module>ext/groovy</module>
-        <module>rules</module>
+        <module>sample-apps</module>
     </modules>
     
     <build>
@@ -74,31 +59,6 @@
                             <skip>${skipDeleteDeps}</skip>
                         </configuration>
                     </execution> 
-                </executions>
-            </plugin>
-            
-            <!-- Forge addon creation - to be inherited & activated using phase=prepare-package, resp. package. -->
-            <plugin>
-                <groupId>org.jboss.forge.furnace</groupId>
-                <artifactId>furnace-maven-plugin</artifactId>
-                <version>${version.furnace}</version>
-                <executions>
-                    <execution>
-                        <id>generate-dot</id>
-                        <phase>none</phase>
-                        <goals> <goal>generate-dot</goal> </goals>
-                        <configuration> <attach>true</attach> </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>create-forge-addon</id>
-                        <phase>none</phase>
-                        <goals> <goal>jar</goal> </goals>
-                        <configuration> <classifier>forge-addon</classifier> </configuration> </execution>
                 </executions>
             </plugin>
             
@@ -182,23 +142,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
-        </dependency>
-        
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
         
         <dependency>
