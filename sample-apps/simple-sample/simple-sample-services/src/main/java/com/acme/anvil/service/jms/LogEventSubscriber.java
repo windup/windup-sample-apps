@@ -3,10 +3,7 @@ package com.acme.anvil.service.jms;
 
 import java.text.SimpleDateFormat;
 
-import javax.ejb.MessageDriven;
-import javax.annotation.security.PermitAll;
-import javax.ejb.ActivationConfigProperty;
-import javax.jms.JMSDestinationDefinition;
+import javax.ejb.MessageDrivenBean;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -16,23 +13,21 @@ import org.apache.log4j.Logger;
 
 import com.acme.anvil.vo.LogEvent;
 
-@JMSDestinationDefinition(
-	    name = LogEventPublisher.QUEUE_JNDI_NAME,
-	    destinationName="LogEventQueue", 
-	    description="Log Event Queue", 
-	    interfaceName = "javax.jms.Queue") 
+import weblogic.ejb.GenericMessageDrivenBean;
+import weblogic.ejbgen.MessageDriven;
+
 @MessageDriven(
-	activationConfig = {
-	    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-	    @ActivationConfigProperty(propertyName = "destination", propertyValue = "LogEventQueue"),
-	}
+   ejbName = "LogEventSubscriber",
+   destinationJndiName = "jms/LogEventQueue",
+   destinationType = "javax.jms.Topic",
+   runAsPrincipalName = "anvil_user",
+   runAs = "anvil_user"
 )
-public class LogEventSubscriber implements MessageListener {
+public class LogEventSubscriber extends GenericMessageDrivenBean implements MessageDrivenBean, MessageListener {
 
 	private static final Logger LOG = Logger.getLogger(LogEventSubscriber.class);
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy 'at' HH:mm:ss z");
 	
-	@PermitAll
 	public void onMessage(Message msg) {
 		ObjectMessage om = (ObjectMessage)msg;
 		Object obj;
