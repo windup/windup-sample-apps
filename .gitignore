@@ -1,6 +1,7 @@
 .classpath
 .project
 .settings
+.tern-project
 .DS_Store
 dependency-reduced-pom.xml
 target/
