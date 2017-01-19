@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.DateUtils;
 
+import weblogic.servlet.security.ServletAuthentication;
+
 public class AuthenticateFilter implements Filter {
 
 	private static final Logger LOG = Logger.getLogger("AuthenticateFilter");
@@ -30,8 +32,7 @@ public class AuthenticateFilter implements Filter {
 		LOG.info("AuthenticateFilter doFilter.");
 		if(req.getAttribute("cancelSession") != null) {
 			LOG.info("Cancelled session due to cancelSession attribute.");
-			request.logout();
-			//ServletAuthentication.invalidateAll(request);
+			ServletAuthentication.invalidateAll(request);
 		}
 		else if(session != null) {
 			Date fiveMinutesAgo = DateUtils.addMinutes(new Date(), -5);
@@ -42,8 +43,7 @@ public class AuthenticateFilter implements Filter {
 				LOG.info("Cancelled session due to age");
 				session.invalidate();
 				//make the user log back in.
-				request.logout();
-				//ServletAuthentication.invalidateAll(request);
+				ServletAuthentication.invalidateAll(request);
 			}
 		} 
 		chain.doFilter(req, resp);
