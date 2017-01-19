@@ -1,5 +1,7 @@
 package com.acme.anvil.service.jms;
 
+import java.util.Properties;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
@@ -68,7 +70,10 @@ public class LogEventPublisher {
 	}
 
 	private Context getContext() throws NamingException {
-		return new InitialContext();
+		Properties environment = new Properties();
+		environment.put(Context.INITIAL_CONTEXT_FACTORY, "weblogic.jndi.WLInitialContextFactory");
+		environment.put(Context.PROVIDER_URL, "t3://localhost:7001");
+		return new InitialContext(environment);
 	}
 
 	private Queue getQueue(Context context) throws NamingException {
