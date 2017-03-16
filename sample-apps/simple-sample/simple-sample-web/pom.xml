@@ -23,6 +23,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+                <!-- proprietary stubs -->
+                <dependency>
+			<groupId>org.jboss.windup.test.apps.weblogic</groupId>
+			<artifactId>proprietary-stub</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+                </dependency>
+
 		<dependency>
 			<groupId>javaee</groupId>
 			<artifactId>javaee-api</artifactId>
