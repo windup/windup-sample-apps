@@ -14,6 +14,13 @@
 	<name>Simple JEE Example EJB Services</name>
 
 	<dependencies>
+                <!-- proprietary stubs -->
+                <dependency>
+                        <groupId>org.jboss.windup.test.apps.weblogic</groupId>
+                        <artifactId>proprietary-stub</artifactId>
+                        <version>${project.version}</version>
+                        <scope>provided</scope>
+                </dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
