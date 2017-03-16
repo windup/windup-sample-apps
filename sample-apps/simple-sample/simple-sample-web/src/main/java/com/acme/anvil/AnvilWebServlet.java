@@ -19,6 +19,18 @@ import com.acme.anvil.service.ItemLookupLocal;
 import com.acme.anvil.service.ItemLookupLocalHome;
 import com.acme.anvil.vo.Item;
 
+import weblogic.servlet.annotation.WLInitParam;
+import weblogic.servlet.annotation.WLServlet;
+
+@WLServlet(
+    name = "catalog",
+    runAs = "SuperEditor",
+    initParams = {
+        @WLInitParam (name="catalog", value="spring"),
+        @WLInitParam (name="language", value="English")
+    },
+    mapping = {"/catalog/*"}
+)
 public class AnvilWebServlet extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(AnvilWebServlet.class.getName());
