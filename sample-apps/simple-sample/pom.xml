@@ -15,6 +15,9 @@
 		<module>simple-sample-services</module>
 		<module>simple-sample-web</module>
 		<module>simple-sample-app</module>
+              
+                <!-- Stub to allow compilation against proprietary APIs -->
+                <module>proprietary-stub</module>
 	</modules>
 
 	<properties>
